@@ -1,0 +1,28 @@
+package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
+
+import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
+import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
+import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+
+@Service
+public class PingCommandProcessor extends AbstractCommandProcessor {
+    protected PingCommandProcessor(
+            BotConfigurationProperties botConfigurationProperties,
+            BotMessagePublisher botMessagePublisher) {
+        super(botConfigurationProperties, botMessagePublisher);
+    }
+
+    @Override
+    protected void handleUpdate(Update update, String chatId) {
+        botMessagePublisher.publishMessage(new SendMessage(chatId, "Pong"));
+    }
+
+    @Override
+    public String getCommand() {
+        return "ping";
+    }
+
+}
