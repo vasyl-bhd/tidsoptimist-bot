@@ -5,7 +5,7 @@ bot:
 spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:memory:myDb?cache=shared
+    url: jdbc:sqlite:folks.sqlite:folks?cache=shared
     username: sa
     password: sa
   jpa:
