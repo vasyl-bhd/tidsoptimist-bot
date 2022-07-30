@@ -1,16 +1,18 @@
 bot:
-  token: $BOT_TOKEN
-  username: $BOT_USERNAME
+  token: ${BOT_TOKEN}
+  username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}
+
 spring:
   datasource:
-    driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:folks.sqlite:folks?cache=shared
-    username: sa
-    password: sa
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/folks
+    username: admin
+    password: admin
   jpa:
     open-in-view: false
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 
