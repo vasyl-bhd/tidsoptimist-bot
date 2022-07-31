@@ -37,9 +37,9 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         var messageEntities = update.getMessage().getEntities();
 
         if (messageEntities.size() == 1) {
-            botMessagePublisher.publishMessage(new SendMessage(chatId, "Seems like someone forgot to put user handle. Usage: '/late @someone'"));
             return;
         }
+
         var userNames = getUserNames(messageEntities);
 
         userNames.forEach(guysDaoHandler::logLate);
@@ -54,7 +54,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "late";
+        return "l";
     }
 
     private String prepareReportForUser(String username) {

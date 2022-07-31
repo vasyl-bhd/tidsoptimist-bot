@@ -2,6 +2,10 @@ bot:
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}
+  group-users:
+    - @vasyl_bhd
+    - @candy_rain
+
 
 spring:
   datasource:
