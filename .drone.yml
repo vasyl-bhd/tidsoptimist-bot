@@ -1,0 +1,54 @@
+kind: pipeline
+type: docker
+name: all-in-one
+volumes:
+  - name: build-folder
+    temp: {}
+steps:
+  - name: build
+    image: maven:3.8.6-eclipse-temurin-17-alpine
+    volumes:
+      - name: build-folder
+        path: /target/
+    commands:
+      - echo "Building app"
+      - mvn clean package
+      - echo "Build successfully!!!"
+  - name: deploy
+    image: plugins/docker
+    settings:
+      username:
+        from_secret:
+          dockerhub_username
+      password:
+        from_secret:
+          dockerhub_password
+      repo:
+        from_secret:
+          dockerhub_repo
+      tags:
+        from_secret:
+          dockerhub_app
+    when:
+      branch: master
+      status: success
+  - name: restart_service
+    image: appleboy/drone-ssh
+    environment:
+      REPO_PATH:
+        from_secret: repo_path
+    settings:
+      host:
+        from_secret: ssh_host
+      username:
+        from_secret: ssh_username
+      password:
+        from_secret: ssh_password
+      port:
+        from_secret: ssh_port
+      envs:
+        - REPO_PATH
+      when:
+        branch: master
+        status: success
+      script: "cd $REPO_PATH && docker-compose pull && docker-compose up -d"
