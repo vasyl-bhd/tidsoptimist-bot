@@ -21,12 +21,12 @@ public class GuysDaoHandler {
 
     private final GuysDao guysDao;
 
-    public Guy logLate(String username) {
+    public void logLate(String username) {
         var guy = new Guy();
         guy.setUsername(username);
         guy.setLateDate(Timestamp.from(Instant.now()));
 
-        return guysDao.save(guy);
+       guysDao.save(guy);
     }
 
     public List<String> getWeeklyStats(String username) {
