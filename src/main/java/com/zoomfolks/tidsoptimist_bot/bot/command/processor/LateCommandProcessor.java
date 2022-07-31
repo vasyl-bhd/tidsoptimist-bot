@@ -31,7 +31,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    protected void handleUpdate(Update update, String chatId) {
+    protected void process(Update update, String chatId) {
         botMessagePublisher.publishMessage(sendTyping(chatId));
 
         var messageEntities = update.getMessage().getEntities();

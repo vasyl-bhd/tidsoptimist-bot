@@ -28,7 +28,7 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    protected void handleUpdate(Update update, String chatId) {
+    protected void process(Update update, String chatId) {
         botMessagePublisher.publishMessage(sendTyping(chatId));
 
         var report = prepareReportForUsers();
@@ -44,7 +44,9 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
     private String prepareReportForUsers() {
         var latesForUser = guysDaoHandler.getWeeklyStatsForAll();
         var delimiter = System.lineSeparator() + "----------------" + System.lineSeparator();
-
+        if (latesForUser.isEmpty()) {
+            return "No recorded stats YET....";
+        }
         return latesForUser.entrySet().stream()
                 .map(e -> reportService.getShortReport(e.getKey(), e.getValue().size()))
                 .collect(Collectors.joining(delimiter, "Here's what we've got" + System.lineSeparator(), ""));

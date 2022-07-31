@@ -16,7 +16,7 @@ public class PingCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    protected void handleUpdate(Update update, String chatId) {
+    protected void process(Update update, String chatId) {
         botMessagePublisher.publishMessage(new SendMessage(chatId, "Pong"));
     }
 
