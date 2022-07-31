@@ -3,18 +3,22 @@ package com.zoomfolks.tidsoptimist_bot.bot.service;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class ReportService {
 
-    public String getDetailedReport(String username, List<String> lates) {
+    final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, hh:mm").localizedBy(Locale.ENGLISH);
+
+    public String getReport(String username, List<LocalDateTime> lates) {
         return username + System.lineSeparator() +
-                "Total lates this week: " + lates.size() + System.lineSeparator() +
-                "Details: " + System.lineSeparator() + String.join(System.lineSeparator(), lates);
+                lates.stream()
+                        .map(dtf::format)
+                        .collect(Collectors.joining("\n"));
     }
 
-    public String getShortReport(String username, int lates) {
-        return username + System.lineSeparator() +  "Total lates this week: " + lates;
-    }
 }

@@ -60,7 +60,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
     private String prepareReportForUser(String username) {
         var latesForUser = guysDaoHandler.getWeeklyStats(username);
 
-        return reportService.getDetailedReport(username, latesForUser);
+        return reportService.getReport(username, latesForUser);
     }
 
     private List<String> getUserNames(List<MessageEntity> messageEntities) {

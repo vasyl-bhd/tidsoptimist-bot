@@ -28,19 +28,19 @@ public class GuysDaoHandler {
        guysDao.save(guy);
     }
 
-    public List<String> getWeeklyStats(String username) {
+    public List<LocalDateTime> getWeeklyStats(String username) {
         return guysDao.findAllByUsername(username)
                 .stream()
                 .filter(g -> g.getLateDate().toInstant().isAfter(startOfWeek()))
-                .map(g -> g.getLateDate().toString())
+                .map(g -> g.getLateDate().toLocalDateTime())
                 .collect(toList());
     }
 
-    public Map<String, List<String>> getWeeklyStatsForAll() {
+    public Map<String, List<LocalDateTime>> getWeeklyStatsForAll() {
         return guysDao.findAll()
                 .stream()
                 .filter(g -> g.getLateDate().toInstant().isAfter(startOfWeek()))
-                .collect(groupingBy(Guy::getUsername, Collectors.mapping(g -> g.getLateDate().toString(), toList())));
+                .collect(groupingBy(Guy::getUsername, Collectors.mapping(g -> g.getLateDate().toLocalDateTime(), toList())));
     }
 
     private Instant startOfWeek() {

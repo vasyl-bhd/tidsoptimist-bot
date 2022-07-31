@@ -48,7 +48,7 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
             return "No recorded stats YET....";
         }
         return latesForUser.entrySet().stream()
-                .map(e -> reportService.getShortReport(e.getKey(), e.getValue().size()))
+                .map(e -> reportService.getReport(e.getKey(), e.getValue()))
                 .collect(Collectors.joining(delimiter, "Here's what we've got" + System.lineSeparator(), ""));
     }
 }
