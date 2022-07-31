@@ -3,7 +3,6 @@ WORKDIR application
 ARG JAR_FILE=target/*.jar
 ARG DB_FILE=folks.sqlite
 COPY ${JAR_FILE} application.jar
-COPY ${DB_FILE} db.sqlite
 RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM openjdk:17.0.2-slim-buster
