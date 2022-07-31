@@ -18,7 +18,7 @@ public abstract class AbstractCommandProcessor implements CommandProcessor {
     @Override
     public void process(Update update) {
         if (isValidMessage(update)) {
-            process(update, update.getMessage().getFrom().getId().toString());
+            process(update, update.getMessage().getChatId().toString());
         }
     }
 

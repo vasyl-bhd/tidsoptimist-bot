@@ -44,7 +44,6 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
         userNames.forEach(guysDaoHandler::logLate);
 
-        botMessagePublisher.publishMessage(new SendMessage(chatId, "Feel bad for them... Anyways, here's fresh stats"));
         botMessagePublisher.publishMessage(sendTyping(chatId));
 
         userNames.stream()
