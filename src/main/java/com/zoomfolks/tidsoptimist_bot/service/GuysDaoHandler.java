@@ -44,7 +44,7 @@ public class GuysDaoHandler {
                 .collect(groupingBy(Guy::getUsername, Collectors.mapping(g -> g.getLateDate().toString(), toList())));
     }
 
-    public static Instant startOfWeek() {
+    private Instant startOfWeek() {
         return LocalDateTime.now()
                 .with(LocalTime.MIN)
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
