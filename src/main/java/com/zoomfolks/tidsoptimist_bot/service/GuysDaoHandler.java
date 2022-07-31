@@ -18,13 +18,12 @@ import static java.util.stream.Collectors.toList;
 @Service
 @RequiredArgsConstructor
 public class GuysDaoHandler {
-
     private final GuysDao guysDao;
 
     public void logLate(String username) {
         var guy = new Guy();
         guy.setUsername(username);
-        guy.setLateDate(Timestamp.from(Instant.now()));
+        guy.setLateDate(Timestamp.valueOf(LocalDateTime.now()));
 
        guysDao.save(guy);
     }
@@ -45,9 +44,6 @@ public class GuysDaoHandler {
     }
 
     private Instant startOfWeek() {
-        return LocalDateTime.now()
-                .with(LocalTime.MIN)
-                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .toInstant(ZoneOffset.UTC);
+        return LocalDateTime.now().with(LocalTime.MIN).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toInstant(ZoneOffset.UTC);
     }
 }
