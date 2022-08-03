@@ -44,6 +44,6 @@ public class GuysDaoHandler {
     }
 
     private Instant startOfWeek() {
-        return LocalDateTime.now().with(LocalTime.MIN).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toInstant(ZoneOffset.UTC);
+        return LocalDateTime.now().minusWeeks(1).with(LocalTime.MIN).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toInstant(ZoneOffset.UTC);
     }
 }
