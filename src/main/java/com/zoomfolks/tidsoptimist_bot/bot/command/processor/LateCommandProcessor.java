@@ -11,9 +11,11 @@ import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.zoomfolks.tidsoptimist_bot.utils.DateUtils.isWeekend;
 import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.sendTyping;
 
 @Service
@@ -37,6 +39,12 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         var messageEntities = update.getMessage().getEntities();
 
         if (messageEntities.size() == 1) {
+            return;
+        }
+
+        if (isWeekend(LocalDateTime.now())) {
+            botMessagePublisher.publishMessage(new SendMessage((String.valueOf(groupId)),
+                    "❌❌❌Closed till Monday❌❌❌"));
             return;
         }
 

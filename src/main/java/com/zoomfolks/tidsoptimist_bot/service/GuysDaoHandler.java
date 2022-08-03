@@ -6,12 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.*;
-import java.time.temporal.TemporalAdjusters;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.zoomfolks.tidsoptimist_bot.utils.DateUtils.startOfWeek;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
@@ -41,9 +41,5 @@ public class GuysDaoHandler {
                 .stream()
                 .filter(g -> g.getLateDate().toInstant().isAfter(startOfWeek()))
                 .collect(groupingBy(Guy::getUsername, Collectors.mapping(g -> g.getLateDate().toLocalDateTime(), toList())));
-    }
-
-    private Instant startOfWeek() {
-        return LocalDateTime.now().minusWeeks(1).with(LocalTime.MIN).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toInstant(ZoneOffset.UTC);
     }
 }
