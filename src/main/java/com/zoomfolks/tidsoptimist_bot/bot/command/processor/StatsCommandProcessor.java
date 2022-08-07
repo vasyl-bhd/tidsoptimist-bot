@@ -5,13 +5,18 @@ import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.bot.service.ReportService;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import com.zoomfolks.tidsoptimist_bot.service.GuysDaoHandler;
+import com.zoomfolks.tidsoptimist_bot.utils.DateUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.sendTyping;
+import static java.util.function.Predicate.not;
 
 @Service
 public class StatsCommandProcessor extends AbstractCommandProcessor {
@@ -47,8 +52,15 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
         if (latesForUser.isEmpty()) {
             return "No recorded stats YET....";
         }
+
         return latesForUser.entrySet().stream()
+                .map(e -> Map.entry(e.getKey(), getWorkdayLates(e.getValue())))
+                .filter(e -> !e.getValue().isEmpty())
                 .map(e -> reportService.getReport(e.getKey(), e.getValue()))
                 .collect(Collectors.joining(delimiter, "Here's what we've got" + System.lineSeparator(), ""));
+    }
+
+    private List<LocalDateTime> getWorkdayLates(List<LocalDateTime> allLates) {
+        return allLates.stream().filter(not(DateUtils::isWeekend)).collect(Collectors.toList());
     }
 }
