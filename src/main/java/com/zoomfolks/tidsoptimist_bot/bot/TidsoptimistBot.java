@@ -9,6 +9,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -45,10 +48,15 @@ public class TidsoptimistBot extends TelegramLongPollingBot {
     }
 
     @EventListener
-    public <T extends Serializable> void sendMessage(BotApiMethod<T> apiMethod) {
+    public <T extends Serializable> void sendMessage(PartialBotApiMethod<T> apiMethod) {
         try {
             log.info("{}", apiMethod);
-            execute(apiMethod);
+            switch (apiMethod) {
+                case BotApiMethod<T> botApiMethod -> execute(botApiMethod);
+                case SendSticker sendSticker -> execute(sendSticker);
+                case SendPhoto sendPhoto -> execute(sendPhoto);
+                default -> {}
+            }
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }

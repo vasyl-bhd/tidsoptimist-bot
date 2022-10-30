@@ -7,7 +7,9 @@ import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import com.zoomfolks.tidsoptimist_bot.service.GuysDaoHandler;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.EntityType;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static com.zoomfolks.tidsoptimist_bot.utils.CommandUtils.getChatId;
 import static com.zoomfolks.tidsoptimist_bot.utils.DateUtils.isWeekend;
+import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.sendTyping;
 
 @Service
@@ -24,6 +27,8 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
     private final GuysDaoHandler guysDaoHandler;
     private final ReportService reportService;
+    private final String botName;
+    private final List<String> stickerIds;
     protected LateCommandProcessor(
             BotConfigurationProperties botConfigurationProperties,
             BotMessagePublisher botMessagePublisher,
@@ -31,6 +36,8 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         super(botConfigurationProperties, botMessagePublisher);
         this.guysDaoHandler = guysDaoHandler;
         this.reportService = reportService;
+        this.botName = botConfigurationProperties.getUsername();
+        this.stickerIds = botConfigurationProperties.getStickerIds();
     }
 
     @Override
@@ -52,10 +59,16 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
         var userNames = getUserNames(messageEntities);
 
+        if (userNames.size() == 1 && userNames.contains(botName)) {
+            botMessagePublisher.publishMessage(new SendSticker(chatId, new InputFile(getRandomElement(stickerIds))));
+            return;
+        }
+        actuallyLogLates(chatId, userNames);
+    }
+
+    private void actuallyLogLates(String chatId, List<String> userNames) {
         userNames.forEach(guysDaoHandler::logLate);
-
         botMessagePublisher.publishMessage(sendTyping(chatId));
-
         userNames.stream()
                 .map(this::prepareReportForUser)
                 .forEach(msg -> botMessagePublisher.publishMessage(new SendMessage(String.valueOf(groupId), msg)));

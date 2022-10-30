@@ -2,8 +2,13 @@ bot:
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}
-
-
+  sticker-ids:
+    - CAACAgIAAxkBAAEZfZZjXu2Wd-cIXcA_GoQ5rAx-n_qLoAACAQADP1mTJJGac6nTHq2PKgQ
+    - CAACAgIAAxkBAAEZfZljXu3xwApjmwtPTXr4sjF2OSVftgACDwADP1mTJLNDqXWjCIhTKgQ
+    - CAACAgIAAxkBAAEZfZ9jXu4pNoDTdQswxAUB5irue5s2LQACLwADP1mTJMH09Z3UpDBEKgQ
+    - CAACAgIAAxkBAAEZfadjXu5k_Slaxo4PM36A8aZgWh-YlQACZAADP1mTJP9GIBcjlW0yKgQ
+    - CAACAgIAAxkBAAEZfaxjXu6PZLiHS-oIhDaVF-xVrI90YgACOQADP1mTJAm4i-sHo6aXKgQ
+    - CAACAgIAAxkBAAEZfbJjXu7RkPgd7fSF7Ex0nHlqFjBO2gACAgADP1mTJNBT6JfUiUwMKgQ
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
