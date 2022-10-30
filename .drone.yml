@@ -51,4 +51,4 @@ steps:
       when:
         branch: master
         status: success
-      script: "cd $REPO_PATH && docker compose pull && docker-compose up -d"
+      script: "cd $REPO_PATH && docker compose pull && docker compose up -d"
