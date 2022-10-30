@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.zoomfolks.tidsoptimist_bot.utils.CommandUtils.getChatId;
 import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.sendTyping;
 import static java.util.function.Predicate.not;
 
@@ -33,7 +34,9 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    protected void process(Update update, String chatId) {
+    protected void doProcess(Update update) {
+        String chatId = getChatId(update);
+
         botMessagePublisher.publishMessage(sendTyping(chatId));
 
         var report = prepareReportForUsers();

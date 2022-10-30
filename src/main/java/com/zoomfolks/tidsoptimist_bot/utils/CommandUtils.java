@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.utils;
 
 import com.zoomfolks.tidsoptimist_bot.bot.pojo.CommandQuery;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -23,5 +24,9 @@ public class CommandUtils {
         }
 
         return new CommandQuery(command, "");
+    }
+
+    public static String getChatId(Update update) {
+        return update.getMessage().getChatId().toString();
     }
 }

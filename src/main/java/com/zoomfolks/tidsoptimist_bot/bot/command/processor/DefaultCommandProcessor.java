@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import static com.zoomfolks.tidsoptimist_bot.utils.CommandUtils.getChatId;
+
 
 @Service
 public class DefaultCommandProcessor extends AbstractCommandProcessor {
@@ -19,8 +21,8 @@ public class DefaultCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    protected void process(Update update, String chatId) {
-        botMessagePublisher.publishMessage(new SendMessage(chatId,"Sorry, moya ne rozymity"));
+    protected void doProcess(Update update) {
+        botMessagePublisher.publishMessage(new SendMessage(getChatId(update),"Sorry, moya ne rozymity"));
     }
 
     @Override
