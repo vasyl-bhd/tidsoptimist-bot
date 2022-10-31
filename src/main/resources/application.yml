@@ -2,6 +2,7 @@ bot:
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}
+  adminUsername: ${ADMIN_UN}
   sticker-ids:
     - CAACAgIAAxkBAAEZfZZjXu2Wd-cIXcA_GoQ5rAx-n_qLoAACAQADP1mTJJGac6nTHq2PKgQ
     - CAACAgIAAxkBAAEZfZljXu3xwApjmwtPTXr4sjF2OSVftgACDwADP1mTJLNDqXWjCIhTKgQ

@@ -9,11 +9,13 @@ import static com.zoomfolks.tidsoptimist_bot.utils.CommandUtils.getChatId;
 public abstract class AbstractCommandProcessor implements CommandProcessor {
 
     protected final long groupId;
+    protected final String adminUsername;
     protected final BotMessagePublisher botMessagePublisher;
 
     protected AbstractCommandProcessor(BotConfigurationProperties botConfigurationProperties,
                                        BotMessagePublisher applicationEventPublisher) {
         this.groupId = botConfigurationProperties.getGroupId();
+        this.adminUsername = botConfigurationProperties.getAdminUsername();
         this.botMessagePublisher = applicationEventPublisher;
     }
 
@@ -27,6 +29,7 @@ public abstract class AbstractCommandProcessor implements CommandProcessor {
     protected abstract void doProcess(Update update);
 
     private boolean isValidMessage(Update update) {
-        return getChatId(update).equals(String.valueOf(groupId));
+        return getChatId(update).equals(String.valueOf(groupId))
+                || update.getMessage().getFrom().getUserName().equals(adminUsername);
     }
 }

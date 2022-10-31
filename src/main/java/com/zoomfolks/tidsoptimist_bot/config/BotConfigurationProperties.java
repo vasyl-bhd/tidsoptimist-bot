@@ -13,5 +13,6 @@ public class BotConfigurationProperties {
     private String username;
     private String token;
     private long groupId;
+    private String adminUsername;
     private List<String> stickerIds;
 }
