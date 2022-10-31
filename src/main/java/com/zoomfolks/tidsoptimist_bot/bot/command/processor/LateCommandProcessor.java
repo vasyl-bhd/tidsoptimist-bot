@@ -59,7 +59,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
         var userNames = getUserNames(messageEntities);
 
-        if (userNames.size() == 1 && userNames.contains(botName)) {
+        if (userNames.size() == 1 && userNames.contains("@"+botName)) {
             botMessagePublisher.publishMessage(new SendSticker(chatId, new InputFile(getRandomElement(stickerIds))));
             return;
         }
