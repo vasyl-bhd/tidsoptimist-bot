@@ -14,9 +14,8 @@ public class DateUtils {
                 .minusWeeks(1)
                 .with(LocalTime.MIN)
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .toInstant(ZoneOffset.of(ZoneId.systemDefault().getId()));
+                .toInstant(ZoneId.systemDefault().getRules().getOffset(Instant.now()));
     }
-
     public static boolean isWeekend(LocalDateTime localDateTime) {
         switch (localDateTime.getDayOfWeek()) {
             case SATURDAY, SUNDAY -> {
