@@ -15,4 +15,5 @@ public class BotConfigurationProperties {
     private long groupId;
     private String adminUsername;
     private List<String> stickerIds;
+    private String memeApiUrl;
 }
