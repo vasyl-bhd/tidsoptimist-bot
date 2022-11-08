@@ -19,6 +19,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
@@ -41,7 +45,7 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>8.0.0.CR1</version>
+			<version>8.0.0.Final</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.glassfish/jakarta.el -->
 		<dependency>
@@ -53,7 +57,7 @@
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-community-dialects</artifactId>
-			<version>6.1.1.Final</version>
+			<version>6.1.5.Final</version>
 		</dependency>
 	</dependencies>
 

@@ -17,7 +17,6 @@ public class ApplicationStartedHandler implements ApplicationListener<ContextRef
 
     private final TidsoptimistBot tidsoptimistBot;
 
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {

@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 bot:
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
@@ -21,5 +24,3 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
-
-
