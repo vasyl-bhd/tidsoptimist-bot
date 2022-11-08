@@ -45,6 +45,10 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         String chatId = getChatId(update);
         botMessagePublisher.publishMessage(sendTyping(chatId));
 
+        if (update.getMessage().getFrom().getIsBot()) {
+            return;
+        }
+
         var messageEntities = update.getMessage().getEntities();
 
         if (messageEntities.size() == 1) {

@@ -13,7 +13,7 @@ bot:
     - CAACAgIAAxkBAAEZfadjXu5k_Slaxo4PM36A8aZgWh-YlQACZAADP1mTJP9GIBcjlW0yKgQ
     - CAACAgIAAxkBAAEZfaxjXu6PZLiHS-oIhDaVF-xVrI90YgACOQADP1mTJAm4i-sHo6aXKgQ
     - CAACAgIAAxkBAAEZfbJjXu7RkPgd7fSF7Ex0nHlqFjBO2gACAgADP1mTJNBT6JfUiUwMKgQ
-  meme-api-url: ${MEME_API_URL:localhost:8080}
+  meme-api-url: ${MEME_API_URL}
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
