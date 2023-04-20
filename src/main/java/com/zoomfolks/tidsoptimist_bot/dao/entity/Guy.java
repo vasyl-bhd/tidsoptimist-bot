@@ -20,4 +20,6 @@ public class Guy {
     @NotBlank
     private String username;
     private Timestamp lateDate;
+    private Type fckpType;
+
 }
