@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -31,6 +32,7 @@ public class BotCommandHandler {
     public List<BotCommand> initCommands() {
         return commandProcessorMap.values()
                 .stream()
+                .filter(cp -> Objects.nonNull(cp.getCommand()))
                 .map(cp -> BotCommand.builder().command(cp.getCommand()).description(cp.getDescription()).build())
                 .distinct()
                 .toList();
