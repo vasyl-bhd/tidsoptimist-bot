@@ -11,6 +11,8 @@ public interface CommandProcessor {
 
     String getCommand();
 
+    String getDescription();
+
     default List<String> getAliases() {
         return Collections.emptyList();
     }

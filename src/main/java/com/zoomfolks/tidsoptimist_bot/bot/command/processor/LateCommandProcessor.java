@@ -29,6 +29,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
     private final ReportService reportService;
     private final String botName;
     private final List<String> stickerIds;
+
     protected LateCommandProcessor(
             BotConfigurationProperties botConfigurationProperties,
             BotMessagePublisher botMessagePublisher,
@@ -52,18 +53,18 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         var messageEntities = update.getMessage().getEntities();
 
         if (messageEntities.size() == 1) {
-            return;
+            botMessagePublisher.publishMessage(new SendMessage(getChatId(update), "And now type username, you silly"));
         }
 
         if (isWeekend(LocalDateTime.now())) {
-            botMessagePublisher.publishMessage(new SendMessage((String.valueOf(groupId)),
+            botMessagePublisher.publishMessage(new SendMessage(getChatId(update),
                     "❌❌❌Closed till Monday❌❌❌"));
             return;
         }
 
         var userNames = getUserNames(messageEntities);
 
-        if (userNames.size() == 1 && userNames.contains("@"+botName)) {
+        if (userNames.size() == 1 && userNames.contains("@" + botName)) {
             botMessagePublisher.publishMessage(new SendSticker(chatId, new InputFile(getRandomElement(stickerIds))));
             return;
         }
@@ -75,12 +76,17 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         botMessagePublisher.publishMessage(sendTyping(chatId));
         userNames.stream()
                 .map(this::prepareReportForUser)
-                .forEach(msg -> botMessagePublisher.publishMessage(new SendMessage(String.valueOf(groupId), msg)));
+                .forEach(msg -> botMessagePublisher.publishMessage(new SendMessage(chatId, msg)));
     }
 
     @Override
     public String getCommand() {
         return "l";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Log a late. Has a few aliases. Guess em";
     }
 
     @Override

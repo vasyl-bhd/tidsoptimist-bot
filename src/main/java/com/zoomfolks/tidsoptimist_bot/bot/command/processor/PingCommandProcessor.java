@@ -27,4 +27,9 @@ public class PingCommandProcessor extends AbstractCommandProcessor {
         return "ping";
     }
 
+    @Override
+    public String getDescription() {
+        return "Sends 'Pong'";
+    }
+
 }

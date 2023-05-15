@@ -5,6 +5,7 @@ import com.zoomfolks.tidsoptimist_bot.utils.CommandUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class BotReceivedUpdateHandler {
+public class BotCommandHandler {
     private final Map<String, CommandProcessor> commandProcessorMap;
 
-    public BotReceivedUpdateHandler(List<CommandProcessor> commandProcessors) {
+    public BotCommandHandler(List<CommandProcessor> commandProcessors) {
         this.commandProcessorMap = buildCommandProcessorMap(commandProcessors);
     }
 
@@ -25,6 +26,14 @@ public class BotReceivedUpdateHandler {
 
             commandProcessorMap.getOrDefault(command, commandProcessorMap.get(null)).process(update);
         }
+    }
+
+    public List<BotCommand> initCommands() {
+        return commandProcessorMap.values()
+                .stream()
+                .map(cp -> BotCommand.builder().command(cp.getCommand()).description(cp.getDescription()).build())
+                .distinct()
+                .toList();
     }
 
     private Map<String, CommandProcessor> buildCommandProcessorMap(List<CommandProcessor> commandProcessors) {

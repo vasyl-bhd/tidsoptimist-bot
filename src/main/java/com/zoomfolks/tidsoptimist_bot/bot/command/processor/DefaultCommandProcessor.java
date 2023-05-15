@@ -39,4 +39,9 @@ public class DefaultCommandProcessor extends AbstractCommandProcessor {
         // No need for that
         return null;
     }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
 }

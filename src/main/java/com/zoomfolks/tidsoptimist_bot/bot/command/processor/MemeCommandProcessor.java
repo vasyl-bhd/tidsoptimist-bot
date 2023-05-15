@@ -28,4 +28,9 @@ public class MemeCommandProcessor extends AbstractCommandProcessor {
     public String getCommand() {
         return "meme";
     }
+
+    @Override
+    public String getDescription() {
+        return "Send random meme";
+    }
 }

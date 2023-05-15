@@ -24,4 +24,9 @@ public class PongCommandProcessor extends AbstractCommandProcessor {
     public String getCommand() {
         return "pong";
     }
+
+    @Override
+    public String getDescription() {
+        return "Sends 'хуйонг'";
+    }
 }

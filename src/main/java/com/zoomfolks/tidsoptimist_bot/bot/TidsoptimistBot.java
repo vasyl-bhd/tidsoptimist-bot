@@ -1,6 +1,6 @@
 package com.zoomfolks.tidsoptimist_bot.bot;
 
-import com.zoomfolks.tidsoptimist_bot.bot.service.BotReceivedUpdateHandler;
+import com.zoomfolks.tidsoptimist_bot.bot.service.BotCommandHandler;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -23,7 +24,7 @@ import java.io.Serializable;
 public class TidsoptimistBot extends TelegramLongPollingBot {
 
     private final BotConfigurationProperties botConfigurationProperties;
-    private final BotReceivedUpdateHandler botReceivedUpdateHandler;
+    private final BotCommandHandler botCommandHandler;
 
     @Override
     public String getBotUsername() {
@@ -38,13 +39,18 @@ public class TidsoptimistBot extends TelegramLongPollingBot {
     @Override
     public void onRegister() {
         log.info("Server started");
+        var commands = SetMyCommands.builder()
+                .commands(botCommandHandler.initCommands())
+                .build();
+
+        sendMessage(commands);
     }
 
     @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
         log.info("Received update {}", update);
-        botReceivedUpdateHandler.processUpdate(update);
+        botCommandHandler.processUpdate(update);
     }
 
     @EventListener

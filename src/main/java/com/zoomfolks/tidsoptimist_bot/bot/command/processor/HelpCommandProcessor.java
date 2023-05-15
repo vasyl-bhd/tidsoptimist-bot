@@ -17,19 +17,16 @@ public class HelpCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     protected void doProcess(Update update) {
-        String message = """
-                Usage:
-                /ping — simple ping to check if bot is working
-                /stats — show short stats for all logged users (like user handle and number of lates per current week)
-                /late <username> - log a late for a user
-                /help - that's me
-                """;
-
-        botMessagePublisher.publishMessage(new SendMessage(getChatId(update), message));
+        botMessagePublisher.publishMessage(new SendMessage(getChatId(update), "Help yourself, boyo"));
     }
 
     @Override
     public String getCommand() {
         return "help";
+    }
+
+    @Override
+    public String getDescription() {
+        return "...Helper";
     }
 }

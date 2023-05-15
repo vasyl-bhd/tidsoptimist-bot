@@ -46,7 +46,17 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "stats";
+        return "ls";
+    }
+
+    @Override
+    public List<String> getAliases() {
+        return List.of("latestats");
+    }
+
+    @Override
+    public String getDescription() {
+        return "Show late stats";
     }
 
     private String prepareReportForUsers() {
