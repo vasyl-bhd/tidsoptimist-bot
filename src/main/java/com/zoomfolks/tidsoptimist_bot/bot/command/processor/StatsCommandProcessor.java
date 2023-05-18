@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
 
 import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.bot.service.ReportService;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
@@ -46,7 +47,7 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "ls";
+        return Command.LATE_STATS.getValue();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getDescription() {
-        return "Show late stats";
+        return Command.LATE_STATS.getDescription();
     }
 
     private String prepareReportForUsers() {

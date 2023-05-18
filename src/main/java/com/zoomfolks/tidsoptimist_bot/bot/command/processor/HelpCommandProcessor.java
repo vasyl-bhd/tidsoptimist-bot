@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
 
 import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,11 @@ public class HelpCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "help";
+        return Command.HELP.getValue();
     }
 
     @Override
     public String getDescription() {
-        return "...Helper";
+        return Command.HELP.getDescription();
     }
 }

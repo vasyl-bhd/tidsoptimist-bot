@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
 
 import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.bot.service.ReportService;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
@@ -81,12 +82,12 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "l";
+        return Command.LATE.getValue();
     }
 
     @Override
     public String getDescription() {
-        return "Log a late. Has a few aliases. Guess em";
+        return Command.LATE.getDescription();
     }
 
     @Override

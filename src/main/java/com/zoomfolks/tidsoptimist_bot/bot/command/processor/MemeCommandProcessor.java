@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
 
 import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.bot.service.MemeGenerationHelper;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
@@ -26,11 +27,11 @@ public class MemeCommandProcessor extends AbstractCommandProcessor {
 
     @Override
     public String getCommand() {
-        return "meme";
+        return Command.MEME.getValue();
     }
 
     @Override
     public String getDescription() {
-        return "Send random meme";
+        return Command.MEME.getDescription();
     }
 }
