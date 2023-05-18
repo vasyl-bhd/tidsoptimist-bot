@@ -1,5 +1,6 @@
 package com.zoomfolks.tidsoptimist_bot.bot.service;
 
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.command.CommandProcessor;
 import com.zoomfolks.tidsoptimist_bot.utils.CommandUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -7,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -42,7 +40,8 @@ public class BotCommandHandler {
         var commandProcessorMap = new HashMap<String, CommandProcessor>();
 
         for (CommandProcessor commandProcessor : commandProcessors) {
-            if (commandProcessorMap.containsKey(commandProcessor.getCommand().getValue())) {
+            var stringCommand = Optional.ofNullable(commandProcessor.getCommand()).map(Command::getValue).orElse(null);
+            if (commandProcessorMap.containsKey(stringCommand)) {
                 throw new IllegalArgumentException("Command is already in map. Perhaps there's an overlap?");
             }
 
