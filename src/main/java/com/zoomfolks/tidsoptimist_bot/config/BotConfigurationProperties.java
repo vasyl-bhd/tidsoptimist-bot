@@ -16,4 +16,5 @@ public class BotConfigurationProperties {
     private String adminUsername;
     private List<String> stickerIds;
     private String memeApiUrl;
+    private List<Alias> aliases;
 }
