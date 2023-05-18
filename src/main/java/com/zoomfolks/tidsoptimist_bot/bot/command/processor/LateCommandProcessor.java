@@ -85,11 +85,6 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         return Command.L;
     }
 
-    @Override
-    public List<String> getAliases() {
-        return List.of("peg", "late");
-    }
-
     private String prepareReportForUser(String username) {
         var latesForUser = guysDaoHandler.getWeeklyStats(username);
 

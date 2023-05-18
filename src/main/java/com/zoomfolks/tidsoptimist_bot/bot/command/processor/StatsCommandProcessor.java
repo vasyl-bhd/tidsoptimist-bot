@@ -50,11 +50,6 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
         return Command.LS;
     }
 
-    @Override
-    public List<String> getAliases() {
-        return List.of("latestats");
-    }
-
     private String prepareReportForUsers() {
         var latesForUser = guysDaoHandler.getWeeklyStatsForAll();
         var delimiter = System.lineSeparator() + "----------------" + System.lineSeparator();
