@@ -45,7 +45,7 @@ public class BotCommandHandler {
                 throw new IllegalArgumentException("Command is already in map. Perhaps there's an overlap?");
             }
 
-            commandProcessorMap.put(commandProcessor.getCommand().getValue(), commandProcessor);
+            commandProcessorMap.put(stringCommand, commandProcessor);
 
             for (String alias : commandProcessor.getAliases()) {
                 if (commandProcessorMap.containsKey(alias)) {
