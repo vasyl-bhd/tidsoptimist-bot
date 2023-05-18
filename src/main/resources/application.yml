@@ -14,14 +14,12 @@ bot:
     - CAACAgIAAxkBAAEZfaxjXu6PZLiHS-oIhDaVF-xVrI90YgACOQADP1mTJAm4i-sHo6aXKgQ
     - CAACAgIAAxkBAAEZfbJjXu7RkPgd7fSF7Ex0nHlqFjBO2gACAgADP1mTJNBT6JfUiUwMKgQ
   meme-api-url: ${MEME_API_URL}
-  aliases:
-    - command: l
-      values:
-        - peg
-        - late
-    - command: ls
-      values:
-        - latestats
+  command-aliases:
+    l:
+      - peg
+      - late
+    ls:
+      - latestats
 
 spring:
   datasource:

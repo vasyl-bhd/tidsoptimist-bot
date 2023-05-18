@@ -81,13 +81,8 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.LATE.getValue();
-    }
-
-    @Override
-    public String getDescription() {
-        return Command.LATE.getDescription();
+    public Command getCommand() {
+        return Command.L;
     }
 
     @Override

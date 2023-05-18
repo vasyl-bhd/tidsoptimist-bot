@@ -1,6 +1,7 @@
 package com.zoomfolks.tidsoptimist_bot.bot.command.processor;
 
 import com.zoomfolks.tidsoptimist_bot.bot.command.AbstractCommandProcessor;
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.command.processor.speech.handler.Handler;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
@@ -35,7 +36,7 @@ public class DefaultCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
+    public Command getCommand() {
         // No need for that
         return null;
     }

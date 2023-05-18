@@ -1,10 +1,12 @@
 package com.zoomfolks.tidsoptimist_bot.config;
 
+import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
+import java.util.Map;
 
 @ConfigurationProperties("bot")
 @Configuration
@@ -16,5 +18,5 @@ public class BotConfigurationProperties {
     private String adminUsername;
     private List<String> stickerIds;
     private String memeApiUrl;
-    private List<Alias> aliases;
+    private Map<Command, List<String>> commandAliases;
 }

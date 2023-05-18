@@ -33,7 +33,7 @@ public class BotCommandHandler {
         return commandProcessorMap.values()
                 .stream()
                 .filter(cp -> Objects.nonNull(cp.getCommand()))
-                .map(cp -> BotCommand.builder().command(cp.getCommand()).description(cp.getDescription()).build())
+                .map(cp -> BotCommand.builder().command(cp.getCommand().getValue()).description(cp.getDescription()).build())
                 .distinct()
                 .toList();
     }
@@ -42,11 +42,11 @@ public class BotCommandHandler {
         var commandProcessorMap = new HashMap<String, CommandProcessor>();
 
         for (CommandProcessor commandProcessor : commandProcessors) {
-            if (commandProcessorMap.containsKey(commandProcessor.getCommand())) {
+            if (commandProcessorMap.containsKey(commandProcessor.getCommand().getValue())) {
                 throw new IllegalArgumentException("Command is already in map. Perhaps there's an overlap?");
             }
 
-            commandProcessorMap.put(commandProcessor.getCommand(), commandProcessor);
+            commandProcessorMap.put(commandProcessor.getCommand().getValue(), commandProcessor);
 
             for (String alias : commandProcessor.getAliases()) {
                 if (commandProcessorMap.containsKey(alias)) {

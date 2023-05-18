@@ -9,7 +9,7 @@ public interface CommandProcessor {
 
     void process(Update update);
 
-    String getCommand();
+    Command getCommand();
 
     String getDescription();
 

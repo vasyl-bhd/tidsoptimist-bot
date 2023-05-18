@@ -46,18 +46,13 @@ public class StatsCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.LATE_STATS.getValue();
+    public Command getCommand() {
+        return Command.LS;
     }
 
     @Override
     public List<String> getAliases() {
         return List.of("latestats");
-    }
-
-    @Override
-    public String getDescription() {
-        return Command.LATE_STATS.getDescription();
     }
 
     private String prepareReportForUsers() {

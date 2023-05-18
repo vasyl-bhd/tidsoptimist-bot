@@ -24,13 +24,9 @@ public class PingCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.PING.getValue();
+    public Command getCommand() {
+        return Command.PING;
     }
 
-    @Override
-    public String getDescription() {
-        return Command.PING.getValue();
-    }
 
 }

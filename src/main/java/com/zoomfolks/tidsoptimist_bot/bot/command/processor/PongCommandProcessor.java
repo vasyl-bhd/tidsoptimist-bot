@@ -22,12 +22,7 @@ public class PongCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.PONG.getValue();
-    }
-
-    @Override
-    public String getDescription() {
-        return Command.PONG.getDescription();
+    public Command getCommand() {
+        return Command.PONG;
     }
 }

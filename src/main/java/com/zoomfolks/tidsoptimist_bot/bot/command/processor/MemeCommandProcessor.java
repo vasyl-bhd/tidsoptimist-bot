@@ -26,12 +26,7 @@ public class MemeCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.MEME.getValue();
-    }
-
-    @Override
-    public String getDescription() {
-        return Command.MEME.getDescription();
+    public Command getCommand() {
+        return Command.MEME;
     }
 }

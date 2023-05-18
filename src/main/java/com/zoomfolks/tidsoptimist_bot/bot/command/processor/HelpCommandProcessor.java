@@ -22,12 +22,7 @@ public class HelpCommandProcessor extends AbstractCommandProcessor {
     }
 
     @Override
-    public String getCommand() {
-        return Command.HELP.getValue();
-    }
-
-    @Override
-    public String getDescription() {
-        return Command.HELP.getDescription();
+    public Command getCommand() {
+        return Command.HELP;
     }
 }
