@@ -17,7 +17,7 @@ import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 @Service
 public class PrCheckReminder {
 
-    private static final List<String> questionVariations = List.of(
+    private static final List<String> QUESTION_VARIATIONS = List.of(
             "Hey folks, could you give the open PRs some love today?",
             "Howdy team, the open PRs are feeling a bit lonely. Could you check them out when you have a moment?",
             "Dear team, your attention to the open PRs would be greatly appreciated.",
@@ -26,8 +26,8 @@ public class PrCheckReminder {
             "Hello everyone, the open PRs are having a party today. Sadly, they didn't invite us. Shall we crash it?"
     );
 
-    private static final Map<Answer, List<String>> answerVariations = Map.of(
-            Answer.Yes,  List.of("Yes, I've reviewed a few PRs today and I'll get to the rest soon.",
+    private static final Map<Answer, List<String>> ANSWER_VARIATIONS = Map.of(
+            Answer.Yes, List.of("Yes, I've reviewed a few PRs today and I'll get to the rest soon.",
                     "Absolutely, mate! The PRs and I are already having a chat.",
                     "Indeed, the PRs and I had a wonderful date this morning.",
                     "Yep",
@@ -50,12 +50,12 @@ public class PrCheckReminder {
 
     @Scheduled(cron = "0 14 * * MON-FRI")
     public void sendCheckPrReminder() {
-        var options = answerVariations.values()
+        var options = ANSWER_VARIATIONS.values()
                 .stream()
                 .map(ListUtils::getRandomElement)
                 .collect(Collectors.toList());
 
-        var sendPoll = new SendPoll(String.valueOf(groupId), getRandomElement(questionVariations),
+        var sendPoll = new SendPoll(String.valueOf(groupId), getRandomElement(QUESTION_VARIATIONS),
                 options);
 
         botMessagePublisher.publishMessage(sendPoll);
