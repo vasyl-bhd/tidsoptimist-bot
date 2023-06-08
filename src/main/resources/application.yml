@@ -2,7 +2,7 @@ server:
   port: 8081
 
 bot:
-  openapi-key: ${OPENAPI_KEY}
+  openai-key: ${OPENAI_KEY}
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}
@@ -33,6 +33,3 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
-
-feign:
-  client:

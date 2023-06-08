@@ -9,6 +9,6 @@ public class CompletionGPTClientConfiguration {
 
     @Bean
     RequestInterceptor authHeaderInterceptor(BotConfigurationProperties botConfigurationProperties) {
-        return requestTemplate -> requestTemplate.header("Authorization", "Bearer " + botConfigurationProperties.getOpenapiKey());
+        return requestTemplate -> requestTemplate.header("Authorization", "Bearer " + botConfigurationProperties.getOpenaiKey());
     }
 }
