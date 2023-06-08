@@ -6,9 +6,11 @@ import com.zoomfolks.tidsoptimist_bot.scheduler.dto.Answer;
 import com.zoomfolks.tidsoptimist_bot.utils.ListUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.support.CronExpression;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,7 +52,7 @@ public class PrCheckReminder {
         groupId = botConfigurationProperties.getGroupId();
     }
 
-    @Scheduled(cron = "0 30 14 * * MON-FRI")
+    @Scheduled(cron ="10 0 15 * * MON-FRI")
     public void sendCheckPrReminder() {
         log.info("Executing daily job");
         var options = ANSWER_VARIATIONS.values()
