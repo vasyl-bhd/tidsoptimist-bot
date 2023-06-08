@@ -71,7 +71,7 @@ public class PrCheckReminder {
 
     @PostConstruct
     void init() {
-        log.info("Next job run on {}", CRON);
+        log.info("Next job run on {}", CronExpression.parse(CRON).next(LocalDateTime.now()));
     }
 
 }
