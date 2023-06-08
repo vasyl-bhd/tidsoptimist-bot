@@ -50,7 +50,7 @@ public class PrCheckReminder {
         groupId = botConfigurationProperties.getGroupId();
     }
 
-    @Scheduled(cron = "0 14 * * MON-FRI")
+    @Scheduled(cron = "0 30 14 * * MON-FRI")
     public void sendCheckPrReminder() {
         log.info("Executing daily job");
         var options = ANSWER_VARIATIONS.values()
