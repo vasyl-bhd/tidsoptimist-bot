@@ -14,10 +14,8 @@ import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
@@ -26,7 +24,7 @@ import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 @Slf4j
 public class PrCheckReminder {
 
-    private static final String CRON = "10 0 12 * * MON-FRI";
+    private static final String CRON = "0 10 15 * * MON-FRI";
 
     private static final List<String> QUESTION_VARIATIONS = List.of(
             "Hey folks, could you give the open PRs some love today?",
@@ -59,7 +57,7 @@ public class PrCheckReminder {
         groupId = botConfigurationProperties.getGroupId();
     }
 
-    @Scheduled(cron = CRON)
+    @Scheduled(cron = CRON, zone = "Europe/Kiev")
     public void sendCheckPrReminder() {
         log.info("Executing daily job");
         var options = ANSWER_VARIATIONS.values()
@@ -75,7 +73,7 @@ public class PrCheckReminder {
 
     @PostConstruct
     void init() {
-        log.info("Next job run on {}", CronExpression.parse(CRON).next(Instant.now(Clock.systemDefaultZone())));
+        log.info("Next job run on {}", CronExpression.parse(CRON).next(LocalDateTime.now()));
     }
 
 }
