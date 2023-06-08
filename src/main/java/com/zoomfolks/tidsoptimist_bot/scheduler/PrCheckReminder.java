@@ -4,6 +4,7 @@ import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import com.zoomfolks.tidsoptimist_bot.scheduler.dto.Answer;
 import com.zoomfolks.tidsoptimist_bot.utils.ListUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 
 @Service
+@Slf4j
 public class PrCheckReminder {
 
     private static final List<String> QUESTION_VARIATIONS = List.of(
@@ -50,6 +52,7 @@ public class PrCheckReminder {
 
     @Scheduled(cron = "0 14 * * MON-FRI")
     public void sendCheckPrReminder() {
+        log.info("Executing daily job");
         var options = ANSWER_VARIATIONS.values()
                 .stream()
                 .map(ListUtils::getRandomElement)
