@@ -4,6 +4,7 @@ import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import com.zoomfolks.tidsoptimist_bot.scheduler.dto.Answer;
 import com.zoomfolks.tidsoptimist_bot.utils.ListUtils;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.support.CronExpression;
@@ -20,6 +21,8 @@ import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 @Service
 @Slf4j
 public class PrCheckReminder {
+
+    private static final String CRON = "10 0 15 * * MON-FRI";
 
     private static final List<String> QUESTION_VARIATIONS = List.of(
             "Hey folks, could you give the open PRs some love today?",
@@ -52,7 +55,7 @@ public class PrCheckReminder {
         groupId = botConfigurationProperties.getGroupId();
     }
 
-    @Scheduled(cron ="10 0 15 * * MON-FRI")
+    @Scheduled(cron = CRON)
     public void sendCheckPrReminder() {
         log.info("Executing daily job");
         var options = ANSWER_VARIATIONS.values()
@@ -64,6 +67,11 @@ public class PrCheckReminder {
                 options);
 
         botMessagePublisher.publishMessage(sendPoll);
+    }
+
+    @PostConstruct
+    void init() {
+        log.info("Next job run on {}", CRON);
     }
 
 }
