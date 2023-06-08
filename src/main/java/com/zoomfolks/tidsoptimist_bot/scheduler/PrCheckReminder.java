@@ -11,8 +11,6 @@ import org.springframework.scheduling.support.CronExpression;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
 
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
 @Slf4j
 public class PrCheckReminder {
 
-    private static final String CRON = "0 10 15 * * MON-FRI";
+    private static final String CRON = "0 0 14 * * MON-FRI";
 
     private static final List<String> QUESTION_VARIATIONS = List.of(
             "Hey folks, could you give the open PRs some love today?",
