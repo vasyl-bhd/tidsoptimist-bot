@@ -5,6 +5,7 @@ import com.zoomfolks.tidsoptimist_bot.bot.client.CompletionGPTClient;
 import com.zoomfolks.tidsoptimist_bot.bot.client.models.ChatCompletionRequest;
 import com.zoomfolks.tidsoptimist_bot.bot.pojo.AnswerResponse;
 import com.zoomfolks.tidsoptimist_bot.bot.pojo.PollData;
+import com.zoomfolks.tidsoptimist_bot.bot.pojo.QuestionResponse;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,17 +47,18 @@ public class PollDataFiller {
     }
 
     public PollData generatePollData() {
-        var question = generateQuestion();
+        var question = generateQuestion().question();
         return new PollData(question, generateAnswers(question));
     }
 
-    private String generateQuestion() {
+    @SneakyThrows
+    private QuestionResponse generateQuestion() {
         var chatCompletionRequest = getRequest(QUESTION_MESSAGE, 100);
         var completion = client.getCompletion(chatCompletionRequest);
 
         log.info("Got response from chatGPT: {}", completion);
 
-        return completion.choices().iterator().next().message().content();
+        return new ObjectMapper().readValue(completion.choices().iterator().next().message().content(), QuestionResponse.class);
     }
 
     @SneakyThrows
