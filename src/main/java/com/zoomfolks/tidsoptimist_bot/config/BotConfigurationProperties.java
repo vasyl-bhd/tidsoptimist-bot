@@ -18,5 +18,6 @@ public class BotConfigurationProperties {
     private String adminUsername;
     private List<String> stickerIds;
     private String memeApiUrl;
+    private String openapiKey;
     private Map<Command, List<String>> commandAliases;
 }

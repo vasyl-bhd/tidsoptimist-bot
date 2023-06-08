@@ -2,6 +2,7 @@ server:
   port: 8081
 
 bot:
+  openapi-key: ${OPENAPI_KEY}
   token: ${BOT_TOKEN}
   username: ${BOT_USERNAME}
   groupId: ${GROUP_ID}

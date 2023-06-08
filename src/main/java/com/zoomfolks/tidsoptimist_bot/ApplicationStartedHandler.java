@@ -20,11 +20,11 @@ public class ApplicationStartedHandler implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        try {
-            TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-            telegramBotsApi.registerBot(tidsoptimistBot);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+//            telegramBotsApi.registerBot(tidsoptimistBot);
+//        } catch (TelegramApiException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }
