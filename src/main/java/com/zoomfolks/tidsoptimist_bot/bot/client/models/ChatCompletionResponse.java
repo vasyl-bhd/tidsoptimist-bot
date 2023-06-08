@@ -1,7 +1,11 @@
 package com.zoomfolks.tidsoptimist_bot.bot.client.models;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import java.util.List;
 
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record ChatCompletionResponse(
         String id,
         String object,
