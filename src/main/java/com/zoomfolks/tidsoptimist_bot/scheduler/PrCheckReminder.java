@@ -38,9 +38,7 @@ public class PrCheckReminder {
     private static final Map<Answer, List<String>> ANSWER_VARIATIONS = Map.of(
             Answer.Yes, List.of("Yes, I've reviewed a few PRs today and I'll get to the rest soon.",
                     "Absolutely, mate! The PRs and I are already having a chat.",
-                    "Indeed, the PRs and I had a wonderful date this morning.",
-                    "Yep",
-                    "Y"
+                    "Indeed, the PRs and I had a wonderful date this morning."
                     ),
             Answer.NotYet, List.of("I regret to inform you that I have not yet reviewed the open PRs.",
                     "Sorry, my PR review ride was delayed due to an unexpected coffee spill.",
@@ -65,8 +63,9 @@ public class PrCheckReminder {
                 .map(ListUtils::getRandomElement)
                 .collect(Collectors.toList());
 
-        var sendPoll = new SendPoll(String.valueOf(groupId), getRandomElement(QUESTION_VARIATIONS),
-                options);
+        var sendPoll = SendPoll.builder().chatId(groupId).question(getRandomElement(QUESTION_VARIATIONS))
+                .options(options).isAnonymous(false)
+                .build();
 
         botMessagePublisher.publishMessage(sendPoll);
     }
