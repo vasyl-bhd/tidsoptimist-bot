@@ -30,10 +30,10 @@ public class PollDataFiller {
             Write some answers to the following question: "%s"
             The answers should be divided into 4 categories:
                         
-            * Yes
-            * No
-            * In Progress
-            * Ignore
+            * Yes - meaning the person already reviewed their PRs
+            * No - meaning the person didn't checked PRs yet
+            * In Progress - meaning the person is in progress reviewing PRs
+            * Ignore - meaning the person don't want to review PRs
                         
             Write an example for each of the categories. Answer for the each category should be no longer than 10 words. "No" and "Ignore" should be written in a sarcastic mood. "Yes" and "In Progress" just in a funny way
             Write it as a JSON object with the exact structure:
