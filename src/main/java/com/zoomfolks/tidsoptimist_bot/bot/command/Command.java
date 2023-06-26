@@ -6,7 +6,8 @@ public enum Command {
     PING("Sends 'Pong'"),
     PONG("Sends 'хуйонг'"),
     LS("Show late stats"),
-    L("Log a late. Has a few aliases. Guess em");
+    L("Log a late. Has a few aliases. Guess em"),
+    WAKE("make Wakie Wakie for a team member");
 
 
     private final String description;

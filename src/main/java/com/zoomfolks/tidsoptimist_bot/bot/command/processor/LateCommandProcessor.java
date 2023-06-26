@@ -9,9 +9,7 @@ import com.zoomfolks.tidsoptimist_bot.service.GuysDaoHandler;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
-import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.time.LocalDateTime;
@@ -21,6 +19,7 @@ import java.util.stream.Collectors;
 import static com.zoomfolks.tidsoptimist_bot.utils.CommandUtils.getChatId;
 import static com.zoomfolks.tidsoptimist_bot.utils.DateUtils.isWeekend;
 import static com.zoomfolks.tidsoptimist_bot.utils.ListUtils.getRandomElement;
+import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.getUserNames;
 import static com.zoomfolks.tidsoptimist_bot.utils.MessageUtils.sendTyping;
 
 @Service
@@ -63,8 +62,7 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
             return;
         }
 
-        var userNames = getUserNames(messageEntities);
-
+        var userNames = getUserNames(messageEntities).stream().filter(n -> n.contains("@" + botName)).collect(Collectors.toList());
         if (userNames.size() == 1 && userNames.contains("@" + botName)) {
             botMessagePublisher.publishMessage(new SendSticker(chatId, new InputFile(getRandomElement(stickerIds))));
             return;
@@ -89,12 +87,5 @@ public class LateCommandProcessor extends AbstractCommandProcessor {
         var latesForUser = guysDaoHandler.getWeeklyStats(username);
 
         return reportService.getReport(username, latesForUser);
-    }
-
-    private List<String> getUserNames(List<MessageEntity> messageEntities) {
-        return messageEntities.stream()
-                .filter(me -> me.getType().equals(EntityType.MENTION))
-                .map(MessageEntity::getText)
-                .collect(Collectors.toList());
     }
 }
