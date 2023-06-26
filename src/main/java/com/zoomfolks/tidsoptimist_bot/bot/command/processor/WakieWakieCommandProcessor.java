@@ -35,6 +35,8 @@ public class WakieWakieCommandProcessor extends AbstractCommandProcessor {
 
         var userNames = getUserNames(messageEntities);
 
+        System.out.println(userNames);
+
         var sendVideo = SendVideo.builder()
                 .chatId(chatId)
                 .caption(getCaption(userNames))
@@ -50,6 +52,6 @@ public class WakieWakieCommandProcessor extends AbstractCommandProcessor {
     }
 
     private String getCaption(List<String > userNames) {
-        return String.join(" " + userNames) + "Hola!";
+        return "Hola!" + String.join(" " + userNames);
     }
 }

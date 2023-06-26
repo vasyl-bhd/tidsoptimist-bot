@@ -58,15 +58,19 @@ public class TidsoptimistBot extends TelegramLongPollingBot {
     public <T extends Serializable> void sendMessage(PartialBotApiMethod<T> apiMethod) {
         try {
             log.info("{}", apiMethod);
-            switch (apiMethod) {
-                case BotApiMethod<T> botApiMethod -> execute(botApiMethod);
-                case SendSticker sendSticker -> execute(sendSticker);
-                case SendPhoto sendPhoto -> execute(sendPhoto);
-                case SendVideo sendVideo -> execute(sendVideo);
-                default -> {}
-            }
+            getMessage(apiMethod);
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private <T extends Serializable> void getMessage(PartialBotApiMethod<T> apiMethod) throws TelegramApiException {
+        switch (apiMethod) {
+            case BotApiMethod<T> botApiMethod -> execute(botApiMethod);
+            case SendSticker sendSticker -> execute(sendSticker);
+            case SendPhoto sendPhoto -> execute(sendPhoto);
+            case SendVideo sendVideo -> execute(sendVideo);
+            default -> {}
         }
     }
 }
