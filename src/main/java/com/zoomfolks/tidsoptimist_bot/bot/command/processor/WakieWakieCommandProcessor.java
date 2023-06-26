@@ -6,6 +6,7 @@ import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
+import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.MessageEntity;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -40,6 +41,7 @@ public class WakieWakieCommandProcessor extends AbstractCommandProcessor {
         var sendVideo = SendVideo.builder()
                 .chatId(chatId)
                 .caption(getCaption(userNames))
+                .captionEntities(messageEntities.stream() .filter(me -> me.getType().equals(EntityType.MENTION)).toList())
                 .video(new InputFile("https://video.twimg.com/ext_tw_video/1673199354654478336/pu/vid/720x1280/_OFRGb8w1LfNIDT-.mp4"))
                 .build();
 
