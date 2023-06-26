@@ -44,6 +44,7 @@ public class WakieWakieCommandProcessor extends AbstractCommandProcessor {
 
         if (userNames.isEmpty()) {
             botMessagePublisher.publishMessage(new SendMessage(chatId, "Bruh, tag someone (e.g. @tidsoptimist_bot)"));
+            return;
         }
 
         if (userNames.size() == 1 && userNames.contains("@" + botName)) {
