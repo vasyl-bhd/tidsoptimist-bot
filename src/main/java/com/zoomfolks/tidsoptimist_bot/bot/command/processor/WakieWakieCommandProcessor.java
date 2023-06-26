@@ -5,6 +5,7 @@ import com.zoomfolks.tidsoptimist_bot.bot.command.Command;
 import com.zoomfolks.tidsoptimist_bot.bot.publisher.BotMessagePublisher;
 import com.zoomfolks.tidsoptimist_bot.config.BotConfigurationProperties;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.EntityType;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -40,20 +41,18 @@ public class WakieWakieCommandProcessor extends AbstractCommandProcessor {
 
         var sendVideo = SendVideo.builder()
                 .chatId(chatId)
-                .caption(getCaption(userNames))
-                .captionEntities(messageEntities.stream() .filter(me -> me.getType().equals(EntityType.MENTION)).toList())
+                .caption("Wakie wakie!" + userNames)
+                .protectContent(true)
                 .video(new InputFile("https://video.twimg.com/ext_tw_video/1673199354654478336/pu/vid/720x1280/_OFRGb8w1LfNIDT-.mp4"))
                 .build();
 
         botMessagePublisher.publishMessage(sendVideo);
+
+        botMessagePublisher.publishMessage(new SendMessage(chatId, String.join(" ", userNames) + "wake up mb ^"));
     }
 
     @Override
     public Command getCommand() {
         return Command.WAKE;
-    }
-
-    private String getCaption(List<String > userNames) {
-        return "Hola!" + String.join(" " + userNames);
     }
 }
