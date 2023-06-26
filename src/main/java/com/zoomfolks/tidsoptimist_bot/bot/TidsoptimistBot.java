@@ -13,6 +13,7 @@ import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
+import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -61,6 +62,7 @@ public class TidsoptimistBot extends TelegramLongPollingBot {
                 case BotApiMethod<T> botApiMethod -> execute(botApiMethod);
                 case SendSticker sendSticker -> execute(sendSticker);
                 case SendPhoto sendPhoto -> execute(sendPhoto);
+                case SendVideo sendVideo -> execute(sendVideo);
                 default -> {}
             }
         } catch (TelegramApiException e) {
