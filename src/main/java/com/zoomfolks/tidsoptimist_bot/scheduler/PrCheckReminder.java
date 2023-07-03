@@ -28,7 +28,7 @@ public class PrCheckReminder {
         this.groupId = botConfigurationProperties.getGroupId();
     }
 
-    @Scheduled(cron = CRON, zone = "Europe/Kiev")
+    //@Scheduled(cron = CRON, zone = "Europe/Kiev")
     public void sendCheckPrReminder() {
         log.info("Executing daily job");
         var pollData = pollDataFiller.generatePollData();
